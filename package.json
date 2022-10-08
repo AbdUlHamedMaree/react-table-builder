@@ -1,9 +1,9 @@
 {
   "name": "@mrii/react-table-builder",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": false,
   "sideEffects": false,
-  "description": "library to easily build tables using MUI",
+  "description": "library to easily build tables using MUI grid",
   "repository": {
     "type": "git",
     "url": "https://github.com/AbdUlHamedMaree/react-table-builder.git"
