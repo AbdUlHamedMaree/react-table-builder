@@ -1,0 +1,30 @@
+{
+  "name": "nextjs-testing",
+  "version": "0.1.0",
+  "private": false,
+  "license": "MIT",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint . --fix"
+  },
+  "dependencies": {
+    "@mrii/react-table-builder": "link:..",
+    "@mui/material": "link:../node_modules/@mui/material",
+    "@mui/x-data-grid": "link:../node_modules/@mui/x-data-grid",
+    "date-fns": "link:../node_modules/date-fns",
+    "next": "^12.1.0",
+    "react": "link:../node_modules/react",
+    "react-dom": "link:../node_modules/react-dom",
+    "numeral": "link:../node_modules/numeral"
+  },
+  "devDependencies": {
+    "@types/node": "link:../node_modules/@types/node",
+    "@types/react": "link:../node_modules/@types/react",
+    "@types/react-dom": "link:../node_modules/@types/react-dom",
+    "eslint": "link:../node_modules/eslint",
+    "eslint-config-next": "12.1.0",
+    "typescript": "link:../node_modules/typescript"
+  }
+}
