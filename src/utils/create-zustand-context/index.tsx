@@ -1,6 +1,6 @@
 import createContext from 'zustand/context';
 import { Draft } from 'immer';
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import { StoreApi } from 'zustand';
 import { AnyObject, StateCreator } from '$types';
 import { createStore } from '../create-store';

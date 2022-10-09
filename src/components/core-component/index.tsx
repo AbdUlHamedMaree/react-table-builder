@@ -4,7 +4,7 @@ import {
   GridColDef,
   GridSlotsComponent,
 } from '@mui/x-data-grid';
-import React, { forwardRef, memo, useCallback, useEffect, useMemo } from 'react';
+import { forwardRef, memo, useCallback, useEffect, useMemo } from 'react';
 import get from 'lodash.get';
 import {
   ColumnModel,

@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 import { styled, alpha } from '@mui/material/styles';
 import { CheckBox, CheckBoxOutlineBlank, FilterList } from '@mui/icons-material';
-import React, { forwardRef, memo, useCallback, useMemo, useRef } from 'react';
+import { forwardRef, memo, useCallback, useMemo, useRef } from 'react';
 import { useGridSelector, gridColumnLookupSelector, useGridApiContext } from '@mui/x-data-grid';
 
 import { useTableBuilderFilters, useTableBuilderColumns, useTranslation } from '$context';
@@ -68,7 +68,7 @@ export const CustomGridToolbarFilterButton = memo(
 
     const toggleFiltersPanel = useCallback(() => setPanel(v => !v), [setPanel]);
 
-    const tooltipContentNode = React.useMemo(() => {
+    const tooltipContentNode = useMemo(() => {
       if (filters.length === 0)
         return apiRef?.current.getLocaleText(
           'toolbarFiltersTooltipShow'

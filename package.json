@@ -1,6 +1,6 @@
 {
   "name": "@mrii/react-table-builder",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": false,
   "sideEffects": false,
   "description": "library to easily build tables using MUI grid",
@@ -51,7 +51,8 @@
     "tsc": "tsc",
     "eslint": "eslint .",
     "prettier": "prettier --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\"",
-    "prepack": "yarn build"
+    "prepack": "yarn build",
+    "prepare": "ts-patch install -s"
   },
   "devDependencies": {
     "@emotion/react": "^11.10.4",
@@ -60,7 +61,7 @@
     "@mui/lab": "^5.0.0-alpha.102",
     "@mui/material": "^5.10.8",
     "@mui/x-data-grid": "^5.17.6",
-    "@rollup/plugin-commonjs": "^22.0.2",
+    "@rollup/plugin-commonjs": "^23.0.0",
     "@rollup/plugin-node-resolve": "^14.1.0",
     "@swc/core": "^1.3.6",
     "@swc/jest": "^0.2.23",
@@ -96,9 +97,11 @@
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-swc3": "^0.6.0",
     "rollup-plugin-typescript-paths": "^1.4.0",
+    "ts-patch": "^2.0.2",
     "tslib": "^2.4.0",
     "typescript": "^4.8.4",
-    "zustand": "^4.1.1"
+    "typescript-transform-paths": "^3.3.1",
+    "zustand": "^4.1.2"
   },
   "peerDependencies": {
     "@emotion/react": "^11.10.4",
@@ -113,6 +116,6 @@
     "numeral": "^2.0.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "zustand": "^4.1.1"
+    "zustand": "^4.1.2"
   }
 }

@@ -1,4 +1,4 @@
-import React, { MutableRefObject } from 'react';
+import { MutableRefObject } from 'react';
 
 export const mergeRefs = <T>(
   ...refs: (MutableRefObject<T> | React.RefObject<T> | React.ForwardedRef<T>)[]

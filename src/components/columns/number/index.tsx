@@ -1,5 +1,5 @@
 import { Numeral } from 'numeral';
-import React, { memo } from 'react';
+import { memo } from 'react';
 import { useAddTableColumn } from '$hooks';
 import { ColumnProps } from '$types';
 

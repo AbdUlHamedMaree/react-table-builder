@@ -1,5 +1,5 @@
 import { GridColDef } from '@mui/x-data-grid';
-import React, { memo } from 'react';
+import { memo } from 'react';
 import { useAddTableColumn } from '$hooks';
 import { ColumnType } from '$types';
 

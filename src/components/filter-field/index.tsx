@@ -1,8 +1,8 @@
 import { Box, MenuItem, TextField, TextFieldProps } from '@mui/material';
 import DateRangePicker from '@mui/lab/DateRangePicker';
-import React, { forwardRef, memo, useCallback, useEffect, useState } from 'react';
+import { forwardRef, memo, useCallback, useEffect, useState } from 'react';
 import { useDebounce } from '$hooks';
-import { AllowedFilterTypes, SelectItem } from '$types';
+import type { AllowedFilterTypes, SelectItem } from '$types';
 
 const INPUT_WIDTH = 202;
 

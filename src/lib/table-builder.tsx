@@ -1,5 +1,5 @@
 import { forwardRef, memo } from 'react';
-import { CoreTableBuilder, type CoreTableBuilderProps } from '$components';
+import { CoreTableBuilder, CoreTableBuilderProps } from '$components';
 import {
   TableBuilderColumnsProvider,
   TableBuilderFiltersProvider,
