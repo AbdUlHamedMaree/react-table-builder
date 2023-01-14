@@ -1,18 +1,14 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import {
-  Button,
-  Tooltip,
-  ButtonProps,
-  Box,
-  Menu,
-  MenuItem,
-  MenuProps,
-  Badge,
-} from '@mui/material';
+import type { ButtonProps, MenuProps } from '@mui/material';
+import { Button, Tooltip, Box, Menu, MenuItem, Badge } from '@mui/material';
 import { styled, alpha } from '@mui/material/styles';
 import { CheckBox, CheckBoxOutlineBlank, FilterList } from '@mui/icons-material';
 import { forwardRef, memo, useCallback, useMemo, useRef } from 'react';
-import { useGridSelector, gridColumnLookupSelector, useGridApiContext } from '@mui/x-data-grid';
+import {
+  useGridSelector,
+  gridColumnLookupSelector,
+  useGridApiContext,
+} from '@mui/x-data-grid';
 
 import { useTableBuilderFilters, useTableBuilderColumns, useTranslation } from '$context';
 import { allowedFilterTypes } from '$types';
@@ -104,23 +100,22 @@ export const CustomGridToolbarFilterButton = memo(
         columns
           .filter(el => el.filterable && allowedFilterTypes.includes(el.type as any))
           .map(el => {
-            const active = filters.findIndex(e => e.field === el.source) !== -1;
+            const active = filters.findIndex(e => e.field === el.field) !== -1;
             return (
               <MenuItem
-                key={el.source}
+                key={el.field}
                 onClick={() => {
                   active
-                    ? deleteFilter(el.source)
+                    ? deleteFilter(el.field)
                     : addFilter({
-                        field: el.source,
+                        field: el.field,
                         column: el,
-                        operatorValue: el.filterOperator ?? 'eq',
-                        value: filterInitialValue[el.type! as 'date'] ?? '',
+                        value: filterInitialValue[el.type as 'date'] ?? '',
                       });
                 }}
               >
                 {active ? <CheckBox /> : <CheckBoxOutlineBlank />}
-                {t(el.source, true)}
+                {t(el.field, true)}
               </MenuItem>
             );
           }),

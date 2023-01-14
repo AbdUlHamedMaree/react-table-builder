@@ -1,11 +1,17 @@
-import { GridCellParams } from '@mui/x-data-grid';
+import type { GridCellParams, GridColDef } from '@mui/x-data-grid';
 import { memo } from 'react';
 import { useAddTableColumn } from '$hooks';
-import { ColumnProps } from '$types';
+import type { ColumnBaseProps } from '$types';
+import { omitNil } from '$utils/omit-nil';
 
-export type ImageColumnRenderParams = { alt: string | ((rec: GridCellParams) => string) };
+export const imageColumnRenderCell =
+  ({ alt }: ImageColumnExtraProps): GridColDef['renderCell'] =>
+  record =>
+    omitNil(record.value, <img src={`${record.value}`} alt={alt(record)} />);
 
-export const ImageColumn: React.FC<ColumnProps<ImageColumnRenderParams>> = memo(
+export type ImageColumnExtraProps = { alt: (record: GridCellParams) => string };
+
+export const ImageColumn: React.FC<ColumnBaseProps<ImageColumnExtraProps>> = memo(
   function ImageColumn(props) {
     useAddTableColumn({ type: 'image', filterable: false, sortable: false, ...props });
     return null;

@@ -1,14 +1,10 @@
-import { createContext, useCallback, useContext, useState } from 'react';
-import {
-  StoreApi,
-  useStore as useZustandStore,
-  createStore,
-  StateCreator,
-} from 'zustand';
+import { createContext, useContext, useState } from 'react';
+import type { StoreApi, StateCreator } from 'zustand';
+import { useStore as useZustandStore, createStore } from 'zustand';
 import { combine, devtools } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
-import { WithImmer, Write } from './with-immer';
-import { WithDevtools } from './with-devtools';
+import type { WithImmer, Write } from './with-immer';
+import type { WithDevtools } from './with-devtools';
 
 type StoreType<TState, TActions> = WithImmer<
   WithDevtools<StoreApi<Write<TState, TActions>>>

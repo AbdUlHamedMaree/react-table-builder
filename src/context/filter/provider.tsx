@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react';
 import { createZustandContext, stateSetterHandler } from '$utils';
-import { TableBuilderFiltersActions, TableBuilderFiltersState } from './model';
+import type { TableBuilderFiltersActions, TableBuilderFiltersState } from './model';
 
 const [Provider, useTableBuilderFilters] = createZustandContext<
   TableBuilderFiltersState,

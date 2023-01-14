@@ -1,11 +1,10 @@
-import { StateSetter } from '$types';
-import { ColumnModel } from '../table-builder';
+import type { StateSetter } from '$types';
+import type { ColumnMetaData } from '$types/column-metadata';
 
 export type FilterItem<T = unknown> = {
-  column: ColumnModel;
+  column: ColumnMetaData;
   field: string;
   value: T;
-  operatorValue: string;
 };
 
 export type TableBuilderFiltersState = {

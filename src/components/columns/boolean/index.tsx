@@ -1,12 +1,31 @@
 import { memo } from 'react';
 import { useAddTableColumn } from '$hooks';
-import { ColumnProps } from '$types';
+import type { ColumnBaseProps } from '$types';
+import { Check, Close } from '@mui/icons-material';
+import type { SvgIconProps } from '@mui/material';
+import type { GridColDef } from '@mui/x-data-grid';
+import { omitNil } from '$utils/omit-nil';
 
-export type BooleanColumnRenderParams = {};
+export const booleanRenderCell =
+  ({
+    checkIconProps,
+    closeIconProps,
+  }: BooleanColumnExtraProps): GridColDef['renderCell'] =>
+  ({ value }) =>
+    omitNil(value, value ? <Check {...checkIconProps} /> : <Close {...closeIconProps} />);
 
-export const BooleanColumn: React.FC<ColumnProps<BooleanColumnRenderParams>> = memo(
-  function BooleanColumn(props) {
-    useAddTableColumn({ type: 'boolean', filterOperator: 'eq', ...props });
+export type BooleanColumnExtraProps = {
+  checkIconProps?: SvgIconProps;
+  closeIconProps?: SvgIconProps;
+};
+
+export const BooleanColumn: React.FC<ColumnBaseProps<BooleanColumnExtraProps>> = memo(
+  function BooleanColumn({ checkIconProps, closeIconProps, ...props }) {
+    useAddTableColumn({
+      type: 'boolean',
+      renderCell: booleanRenderCell({ checkIconProps, closeIconProps }),
+      ...props,
+    });
     return null;
   }
 );

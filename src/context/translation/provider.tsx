@@ -1,7 +1,7 @@
 import { createContext } from '$utils/create-context';
 import { useMemo } from 'react';
 import { stringToLabel } from '$utils';
-import { TranslationContext } from './model';
+import type { TranslationContext } from './model';
 
 const [Provider, useTranslation] = createContext<TranslationContext>();
 

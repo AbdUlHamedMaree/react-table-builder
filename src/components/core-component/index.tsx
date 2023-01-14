@@ -1,20 +1,11 @@
-import {
-  DataGrid,
-  DataGridProps,
-  GridColDef,
-  GridSlotsComponent,
-} from '@mui/x-data-grid';
+import type { DataGridProps, GridColDef, GridSlotsComponent } from '@mui/x-data-grid';
+import { DataGrid } from '@mui/x-data-grid';
 import { forwardRef, memo, useCallback, useEffect, useMemo } from 'react';
 import get from 'lodash.get';
-import {
-  ColumnModel,
-  FilterItem,
-  useTableBuilderColumns,
-  useTableBuilderFilters,
-  useTranslation,
-} from '$context';
-import { renderMethods } from '$utils/render-methods';
+import type { FilterItem } from '$context';
+import { useTableBuilderColumns, useTableBuilderFilters, useTranslation } from '$context';
 import { stringToLabel } from '$utils/string-to-label';
+import type { ColumnMetaData } from '$types/column-metadata';
 import { CustomGridFilterPanel, CustomGridToolbar } from '../custom';
 
 export type CoreTableBuilderProps = React.PropsWithChildren<
@@ -31,22 +22,18 @@ export const CoreTableBuilder = memo(
       const getLabel = useTranslation(s => s.getFieldLabel);
 
       const resolveColumnProps = useCallback(
-        (col: ColumnModel): GridColDef => ({
+        (col: ColumnMetaData): GridColDef => ({
           ...col,
-          valueGetter: col.source.includes('.')
-            ? params =>
-                col.valueGetter
-                  ? col.valueGetter({
-                      ...params,
-                      value: get(params.row, col.source, '-'),
-                    })
-                  : get(params.row, col.source, (col as any).value)
-            : col.valueGetter,
-          field: col.source,
-          renderCell:
-            col.renderCell ??
-            (col.type ? (renderMethods as any)[col.type]?.(col.renderProps) : undefined),
-          headerName: col.headerName ?? getLabel(col.source) ?? stringToLabel(col.source),
+          valueGetter: params => {
+            const value = get(params.row, col.field, '-');
+            return (
+              col.valueGetter?.({
+                ...params,
+                value,
+              }) ?? value
+            );
+          },
+          headerName: col.headerName ?? getLabel(col.field) ?? stringToLabel(col.field),
         }),
         [getLabel]
       );

@@ -1,8 +1,9 @@
-import { Box, MenuItem, TextField, TextFieldProps } from '@mui/material';
+import type { TextFieldProps } from '@mui/material';
+import { Box, MenuItem, TextField } from '@mui/material';
 import DateRangePicker from '@mui/lab/DateRangePicker';
 import { forwardRef, memo, useCallback, useEffect, useState } from 'react';
 import { useDebounce } from '$hooks';
-import type { AllowedFilterTypes, SelectItem } from '$types';
+import type { FilterAllowedColumnTypeUnion, SelectItem } from '$types';
 
 const INPUT_WIDTH = 202;
 
@@ -28,13 +29,12 @@ const TextFieldDebounced = memo(
 );
 
 export type FilterFieldProps<T = unknown> = {
-  type: AllowedFilterTypes;
   onChange: (value: T) => void;
   value: T;
   label: string;
 } & (
-  | { type: 'select'; items: SelectItem[] }
-  | { type: 'number' | 'string' | 'date' | 'boolean' | 'link' }
+  | { type: 'singleSelect'; items: SelectItem[] }
+  | { type: Exclude<FilterAllowedColumnTypeUnion, 'singleSelect'> }
 );
 
 export const FilterField: React.FC<FilterFieldProps> = memo(function FilterField(props) {
@@ -42,29 +42,19 @@ export const FilterField: React.FC<FilterFieldProps> = memo(function FilterField
 
   switch (props.type) {
     case 'string':
-      return (
-        <TextFieldDebounced
-          value={value}
-          onChangeDebounced={onChange}
-          label={label}
-          sx={{ width: INPUT_WIDTH, maxWidth: '100%' }}
-          inputProps={{ style: { height: 'auto' } }}
-        />
-      );
-
     case 'number':
       return (
         <TextFieldDebounced
           value={value}
           onChangeDebounced={onChange}
           label={label}
-          type='number'
+          type={props.type === 'number' ? 'number' : 'text'}
           sx={{ width: INPUT_WIDTH, maxWidth: '100%' }}
           inputProps={{ style: { height: 'auto' } }}
         />
       );
 
-    case 'select':
+    case 'singleSelect':
       return (
         <TextFieldDebounced
           value={value}

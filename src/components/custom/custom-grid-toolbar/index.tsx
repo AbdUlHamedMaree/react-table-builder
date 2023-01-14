@@ -1,16 +1,16 @@
 import { forwardRef, useMemo } from 'react';
+import type { GridToolbarContainerProps } from '@mui/x-data-grid';
 import {
   GridToolbarContainer,
   GridToolbarColumnsButton,
   GridToolbarExport,
   GridToolbarDensitySelector,
-  GridToolbarContainerProps,
 } from '@mui/x-data-grid';
 import { Box, Grid } from '@mui/material';
 
-import { SelectColumnRenderParams } from '$components/columns';
+import type { SelectColumnExtraProps } from '$components/columns';
 import { useTableBuilderFilters, useTranslation } from '$context';
-import { AllowedFilterTypes } from '$types';
+import type { FilterAllowedColumnTypeUnion } from '$types';
 import { FilterField } from '$components/filter-field';
 import { CustomGridToolbarFilterButton } from '../custom-grid-filter-button';
 
@@ -26,11 +26,11 @@ export const CustomGridToolbar: React.FC = forwardRef<
       filters.map(filter => (
         <Grid key={filter.field} item>
           <FilterField
-            type={filter.column.type as AllowedFilterTypes}
+            type={filter.column.type as FilterAllowedColumnTypeUnion}
             value={filter.value}
             label={t(filter.field, true)}
             onChange={value => editFilter({ ...filter, value })}
-            items={(filter.column.renderProps as SelectColumnRenderParams)?.items}
+            items={(filter.column.extraProps as SelectColumnExtraProps)?.items}
           />
         </Grid>
       )),

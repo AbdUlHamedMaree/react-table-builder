@@ -17,7 +17,7 @@ export const CustomGridFilterPanel: React.FC = () => {
     if (!source) return;
 
     const active = filters.findIndex(e => e.field === source) !== -1;
-    const columnDef = columns.find(c => c.source === source);
+    const columnDef = columns.find(c => c.field === source);
 
     if (active) return deleteFilter(source);
     if (!columnDef) return;
@@ -25,7 +25,6 @@ export const CustomGridFilterPanel: React.FC = () => {
     addFilter({
       field: source,
       column: columnDef,
-      operatorValue: columnDef.filterOperator ?? 'eq',
       value: columnDef.type === 'date' ? [null, null] : '',
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps

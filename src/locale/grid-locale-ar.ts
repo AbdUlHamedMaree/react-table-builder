@@ -1,4 +1,4 @@
-import { GridLocaleText } from '@mui/x-data-grid';
+import type { GridLocaleText } from '@mui/x-data-grid';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
@@ -24,7 +24,8 @@ export const GridLocaleAr: GridLocaleText = {
   toolbarFiltersLabel: 'إظهار عوامل التصفية',
   toolbarFiltersTooltipHide: 'اخفاء عوامل التصفية',
   toolbarFiltersTooltipShow: 'إظهار عوامل التصفية',
-  toolbarFiltersTooltipActive: count => `${count.toLocaleString()} من عوامل التصفية المفعلة`,
+  toolbarFiltersTooltipActive: count =>
+    `${count.toLocaleString()} من عوامل التصفية المفعلة`,
 
   // Export selector toolbar button text
   toolbarExport: 'تصدير',
@@ -77,7 +78,8 @@ export const GridLocaleAr: GridLocaleText = {
   columnMenuSortDesc: 'فرز تنازلياً',
 
   // Column header text
-  columnHeaderFiltersTooltipActive: count => `${count.toLocaleString()} من عوامل التصفية النشطة`,
+  columnHeaderFiltersTooltipActive: count =>
+    `${count.toLocaleString()} من عوامل التصفية النشطة`,
   columnHeaderFiltersLabel: 'إظهار عوامل التصفية',
   columnHeaderSortIconLabel: 'فرز',
 

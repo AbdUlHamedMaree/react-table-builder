@@ -1,15 +1,22 @@
 import { memo } from 'react';
 import { useAddTableColumn } from '$hooks';
-import { ColumnProps, SelectItem } from '$types';
+import type { ColumnBaseProps, SelectItem } from '$types';
+import type { GridColDef } from '@mui/x-data-grid';
+import { omitNil } from '$utils/omit-nil';
 
-export type SelectColumnRenderParams = { items: SelectItem[] };
+export const selectColumnValueFormatter =
+  ({ items }: SelectColumnExtraProps): GridColDef['valueFormatter'] =>
+  ({ value }) =>
+    omitNil(value, items.find(el => el.value === value)?.label ?? value);
 
-export const SelectColumn: React.FC<ColumnProps<SelectColumnRenderParams>> = memo(
+export type SelectColumnExtraProps = { items: SelectItem[] };
+
+export const SelectColumn: React.FC<ColumnBaseProps<SelectColumnExtraProps>> = memo(
   function SelectColumn({ items, ...props }) {
     useAddTableColumn({
-      type: 'select',
-      renderProps: { items },
-      filterOperator: 'eq',
+      type: 'singleSelect',
+      extraProps: { items },
+      valueFormatter: selectColumnValueFormatter({ items }),
       ...props,
     });
     return null;

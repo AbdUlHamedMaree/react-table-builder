@@ -1,4 +1,4 @@
-import { GridLocaleText } from '@mui/x-data-grid';
+import type { GridLocaleText } from '@mui/x-data-grid';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore

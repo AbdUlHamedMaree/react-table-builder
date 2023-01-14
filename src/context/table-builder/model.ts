@@ -1,14 +1,11 @@
-import { GridColDef } from '@mui/x-data-grid';
-import { Dispatch, SetStateAction } from 'react';
-import { ColumnProps } from '$types/field-props';
-
-export type ColumnModel = Pick<GridColDef, 'renderCell'> & ColumnProps;
+import type { Dispatch, SetStateAction } from 'react';
+import type { ColumnMetaData } from '$types/column-metadata';
 
 export type TableBuilderZustandActions = {
-  setColumn: Dispatch<SetStateAction<ColumnModel[]>>;
-  addColumn: (col: ColumnModel) => void;
+  setColumn: Dispatch<SetStateAction<ColumnMetaData[]>>;
+  addColumn: (col: ColumnMetaData) => void;
 };
 
 export type TableBuilderZustandState = {
-  columns: ColumnModel[];
+  columns: ColumnMetaData[];
 };

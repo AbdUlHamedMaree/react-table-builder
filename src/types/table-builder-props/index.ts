@@ -1,4 +1,4 @@
-import { CoreTableBuilderProps } from '$components/core-component';
+import type { CoreTableBuilderProps } from '$components/core-component';
 
 export type TableBuilderProps = Exclude<CoreTableBuilderProps, 'rows'> & {
   name?: string;

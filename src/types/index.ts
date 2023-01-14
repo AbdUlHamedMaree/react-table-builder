@@ -1,5 +1,5 @@
-export * from './column-type';
-export * from './field-props';
+export * from './column-type-union';
+export * from './column-base-props';
 export * from './popular';
 export * from './select-item';
 export * from './state-setter';

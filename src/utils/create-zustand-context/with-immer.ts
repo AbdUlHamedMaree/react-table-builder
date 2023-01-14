@@ -1,4 +1,4 @@
-import { Draft } from 'immer';
+import type { Draft } from 'immer';
 
 export type Write<T, U> = Omit<T, keyof U> & U;
 type SkipTwo<T> = T extends {

@@ -1,5 +1,5 @@
-import { WritableDraft } from 'immer/dist/internal';
-import { StateSetter } from '$types';
+import type { WritableDraft } from 'immer/dist/internal';
+import type { StateSetter } from '$types';
 
 export const stateSetterHandler =
   <TState extends Record<string, any>, TKey extends keyof TState>(

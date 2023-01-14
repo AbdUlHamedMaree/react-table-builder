@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useTableBuilderColumns } from '$context';
-import { ColumnProps } from '$types';
+import type { ColumnMetaData } from '$types/column-metadata';
 
-export const useAddTableColumn = (props: ColumnProps) => {
+export const useAddTableColumn = (props: ColumnMetaData) => {
   const addColumn = useTableBuilderColumns(s => s.addColumn);
 
   useEffect(() => {

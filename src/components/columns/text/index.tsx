@@ -1,12 +1,23 @@
 import { memo } from 'react';
 import { useAddTableColumn } from '$hooks';
-import { ColumnProps } from '$types';
+import type { ColumnBaseProps } from '$types';
+import type { GridColDef } from '@mui/x-data-grid';
+import { omitNil } from '$utils/omit-nil';
 
-export type TextColumnRenderParams = {};
+export const textColumnValueFormatter =
+  (_: TextColumnExtraProps): GridColDef['valueFormatter'] =>
+  ({ value }) =>
+    omitNil(value, value);
 
-export const TextColumn: React.FC<ColumnProps<TextColumnRenderParams>> = memo(
+export type TextColumnExtraProps = {};
+
+export const TextColumn: React.FC<ColumnBaseProps<TextColumnExtraProps>> = memo(
   function TextColumn(props) {
-    useAddTableColumn({ type: 'string', filterOperator: 'contains', ...props });
+    useAddTableColumn({
+      type: 'string',
+      valueFormatter: textColumnValueFormatter({}),
+      ...props,
+    });
     return null;
   }
 );

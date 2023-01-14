@@ -1,6 +1,6 @@
 {
   "name": "@mrii/react-table-builder",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "private": false,
   "sideEffects": false,
   "description": "library to easily build tables using MUI grid",
@@ -49,7 +49,7 @@
     "example:react:dev": "concurrently -k -n build,dev -c magenta,cyan \"yarn build:watch -p none\" \"yarn --cwd reactjs-example start\"",
     "test": "jest",
     "lint": "concurrently --kill-others-on-fail -n tsc,eslint -c magenta,cyan \"yarn type-check\" \"yarn eslint --quiet\"",
-    "lint:fix": "concurrently --kill-others-on-fail -n tsc,eslint -c magenta,cyan \"yarn type-check\" \"yarn eslint --fix --quiet\"",
+    "lint:fix": "concurrently --kill-others-on-fail -n tsc,eslint -c magenta,cyan \"yarn type-check\" \"yarn eslint --fix\"",
     "type-check": "tsc -p ./tsconfig.eslint.json",
     "tsc": "tsc",
     "eslint": "eslint .",

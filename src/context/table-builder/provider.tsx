@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react';
 import { createZustandContext, stateSetterHandler } from '$utils';
-import { TableBuilderZustandActions, TableBuilderZustandState } from './model';
+import type { TableBuilderZustandActions, TableBuilderZustandState } from './model';
 
 const [Provider, useTableBuilderColumns] = createZustandContext<
   TableBuilderZustandState,
@@ -18,7 +18,7 @@ export const TableBuilderColumnsProvider: React.FC<
       (set, get) => ({
         setColumn: stateSetterHandler(set, 'columns'),
         addColumn: column => {
-          const i = get().columns.findIndex(c => c.source === column.source);
+          const i = get().columns.findIndex(c => c.field === column.field);
           if (i !== -1) {
             get().setColumn(v => {
               v[i] = column;
