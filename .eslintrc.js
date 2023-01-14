@@ -1,7 +1,11 @@
 /** @type {import('eslint').Linter.Config} */
 module.exports = {
+  env: {
+    browser: true,
+    node: true,
+    es2022: true,
+  },
   root: true,
-  parser: '@typescript-eslint/parser',
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
@@ -11,6 +15,7 @@ module.exports = {
     'airbnb',
     'plugin:prettier/recommended',
   ],
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     tsconfigRootDir: __dirname,
     project: [
@@ -24,7 +29,9 @@ module.exports = {
     'no-param-reassign': [2, { 'props': false }],
     'no-unused-vars': [0],
     'no-unused-expressions': [0],
+    'no-use-before-define': [0],
     'consistent-return': [0],
+    'no-shadow': [0],
 
     'prettier/prettier': [1],
 
@@ -66,6 +73,7 @@ module.exports = {
     '@typescript-eslint/no-unsafe-call': [0],
     '@typescript-eslint/no-unsafe-member-access': [0],
     '@typescript-eslint/no-unsafe-argument': [0],
+    '@typescript-eslint/consistent-type-imports': 1,
   },
   globals: {
     React: 'readonly',

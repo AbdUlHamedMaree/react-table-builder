@@ -1,4 +1,3 @@
-export * from './create-store';
 export * from './create-zustand-context';
 export * from './merge-functions';
 export * from './merge-refs';

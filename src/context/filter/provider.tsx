@@ -13,6 +13,8 @@ export const TableBuilderFiltersProvider: React.FC<
   React.PropsWithChildren<{ name: string }>
 > = ({ name, children }) => (
   <Provider
+    name={`table-builder-filter - ${name}`}
+    initialState={useMemo(() => ({ filters: [], panel: false }), [])}
     actions={useCallback(
       (set, get) => ({
         setFilters: stateSetterHandler(set, 'filters'),
@@ -30,9 +32,6 @@ export const TableBuilderFiltersProvider: React.FC<
       }),
       []
     )}
-    initialState={useMemo(() => ({ filters: [], panel: false }), [])}
-    name={useMemo(() => `table-builder-filter - ${name}`, [name])}
-    persist
   >
     {children}
   </Provider>

@@ -4,6 +4,6 @@
     "emitDeclarationOnly": false,
     "noEmit": true
   },
-  "include": ["src", "nextjs-example", "reactjs-example"],
-  "exclude": ["node_modules", "dist", "docs"]
+  "include": ["src", "nextjs-example", "reactjs-example", ".eslintrc.js", "*"],
+  "exclude": ["node_modules", "**/dist", "**/docs"]
 }

@@ -1,38 +1,72 @@
-import createContext from 'zustand/context';
-import { Draft } from 'immer';
-import { useCallback } from 'react';
-import { StoreApi } from 'zustand';
-import { AnyObject, StateCreator } from '$types';
-import { createStore } from '../create-store';
+import { createContext, useCallback, useContext, useState } from 'react';
+import {
+  StoreApi,
+  useStore as useZustandStore,
+  createStore,
+  StateCreator,
+} from 'zustand';
+import { combine, devtools } from 'zustand/middleware';
+import { immer } from 'zustand/middleware/immer';
+import { WithImmer, Write } from './with-immer';
+import { WithDevtools } from './with-devtools';
 
-export type ProviderProps<TState extends AnyObject, TActions extends AnyObject> = {
-  name: string;
+type StoreType<TState, TActions> = WithImmer<
+  WithDevtools<StoreApi<Write<TState, TActions>>>
+>;
+
+type ExtractState<S> = S extends {
+  getState: () => infer T;
+}
+  ? T
+  : never;
+type WithReact<S extends StoreApi<unknown>> = S & {
+  getServerState?: () => ExtractState<S>;
+};
+
+export type StateSelector<S extends WithReact<StoreApi<unknown>>> = {
+  (): ExtractState<S>;
+  <U>(selector: (state: ExtractState<S>) => U, equals?: (a: U, b: U) => boolean): U;
+};
+
+export type ProviderProps<TState extends object, TActions extends object> = {
+  name?: string;
   initialState: TState;
-  actions: StateCreator<TState, TActions, (fn: (draft: Draft<TState>) => void) => void>;
-  devtools?: boolean;
-  persist?: boolean;
+  actions: StateCreator<
+    TState & TActions,
+    [['zustand/devtools', never], ['zustand/immer', never]],
+    [],
+    TActions
+  >;
 };
 
 export const createZustandContext = <
-  TState extends AnyObject,
-  TActions extends AnyObject
+  TState extends object,
+  TActions extends object
 >() => {
-  const { Provider: ContextProvider, useStore } =
-    createContext<StoreApi<TState & TActions>>();
+  const Context = createContext<StoreType<TState, TActions> | null>(null);
+
+  const useStore: StateSelector<StoreApi<TState & TActions>> = ((
+    selector: any,
+    equals: any
+  ) => {
+    const store = useContext(Context);
+    if (!store) throw new Error('using columns outside a provider');
+    return useZustandStore(store, selector, equals);
+  }) as any;
+
   const Provider: React.FC<React.PropsWithChildren<ProviderProps<TState, TActions>>> = ({
-    actions,
     initialState,
     name,
-    devtools = false,
-    persist = false,
+
+    actions,
+
     children,
   }) => {
-    const storeCreator = useCallback(
-      () =>
-        createStore({ devtools, persist, name })<TState, TActions>(initialState, actions),
-      [actions, devtools, initialState, name, persist]
+    const [store] = useState<any>(() =>
+      createStore(devtools(combine(initialState, immer(actions as any)), { name }))
     );
-    return <ContextProvider createStore={storeCreator}>{children}</ContextProvider>;
+
+    return <Context.Provider value={store}>{children}</Context.Provider>;
   };
 
   return [Provider, useStore] as const;

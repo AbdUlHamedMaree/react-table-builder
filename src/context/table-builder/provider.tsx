@@ -12,6 +12,8 @@ export const TableBuilderColumnsProvider: React.FC<
   React.PropsWithChildren<{ name: string }>
 > = ({ name, children }) => (
   <Provider
+    name={`table-builder-columns - ${name}`}
+    initialState={useMemo(() => ({ columns: [] }), [])}
     actions={useCallback(
       (set, get) => ({
         setColumn: stateSetterHandler(set, 'columns'),
@@ -29,9 +31,6 @@ export const TableBuilderColumnsProvider: React.FC<
       }),
       []
     )}
-    initialState={useMemo(() => ({ columns: [] }), [])}
-    name={useMemo(() => `table-builder-columns - ${name}`, [name])}
-    persist={false}
   >
     {children}
   </Provider>

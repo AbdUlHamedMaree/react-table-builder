@@ -32,7 +32,7 @@ export default defineConfig([
         esModule: false,
       },
     ],
-    treeshake: 'recommended',
+    treeshake: 'smallest',
     plugins: [
       peerDepsExternal(),
       typescriptPaths(),
